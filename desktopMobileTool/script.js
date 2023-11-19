@@ -32,6 +32,12 @@ function searchName() {
 }
 
 function displayResult(result) {
+    // Clear previous result if it exists
+    const previousResultDiv = document.getElementById("resultDiv");
+    if (previousResultDiv) {
+        previousResultDiv.remove();
+    }
+
     // Create and insert the new result div
     const resultDiv = document.createElement("div");
     resultDiv.id = "resultDiv";
@@ -48,6 +54,12 @@ function displayResult(result) {
 }
 
 function displayNoResult() {
+    // Clear previous result if it exists
+    const previousResultDiv = document.getElementById("resultDiv");
+    if (previousResultDiv) {
+        previousResultDiv.remove();
+    }
+
     // Create and insert the new result div for no result
     const resultDiv = document.createElement("div");
     resultDiv.id = "resultDiv";
