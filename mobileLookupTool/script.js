@@ -3,6 +3,12 @@ function searchName() {
     const enteredName = searchInput.value.toLowerCase().trim(); // Convert to lowercase and remove extra spaces
     const url = "https://docs.google.com/document/d/1tZGAF2po4KXmNW0n6ZTDc1WiReEA3CQxdaklmBW4RHU/export?format=txt";
 
+    // Clear previous result if it exists
+    const previousResultDiv = document.getElementById("resultDiv");
+    if (previousResultDiv) {
+        previousResultDiv.remove();
+    }
+
     fetch(url)
         .then(response => response.text())
         .then(data => {
