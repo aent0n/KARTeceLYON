@@ -1,41 +1,62 @@
 function searchName() {
     const searchInput = document.getElementById("searchBar");
-    const name = searchInput.value;
+    const enteredName = searchInput.value.toLowerCase().trim(); // Convert to lowercase and remove extra spaces
     const url = "https://docs.google.com/document/d/1tZGAF2po4KXmNW0n6ZTDc1WiReEA3CQxdaklmBW4RHU/export?format=txt";
 
     fetch(url)
         .then(response => response.text())
         .then(data => {
             const lines = data.split("\n");
-            const names = lines.map(line => line.split(",")[0]);
-            const ids = lines.map(line => line.split(",")[1]);
-            const index = names.findIndex(n => n.trim() === name);
+            const formattedNames = lines.map(line => line.split(",")[0].toLowerCase().trim()); // Convert names to lowercase and remove extra spaces
 
-            // Remove any existing result div
-            const existingResultDiv = document.getElementById("resultDiv");
-            if (existingResultDiv) {
-                existingResultDiv.remove();
+            // Check for direct match
+            const directMatchIndex = formattedNames.findIndex(name => name === enteredName);
+            if (directMatchIndex !== -1) {
+                displayResult(lines[directMatchIndex]);
+                return;
             }
 
-            // Create and insert the new result div
-            const resultDiv = document.createElement("div");
-            resultDiv.id = "resultDiv";
-            resultDiv.classList.add("mx-auto");
-            if (index !== -1) {
-                const idText = document.createElement("span");
-                idText.innerText = ids[index];
-                idText.style.color = "#4E92EC";
-                resultDiv.innerText = "⚡ User found, ID is: ";
-                resultDiv.appendChild(idText);
-            } else {
-                resultDiv.innerText = "❌ User not found";
+            // Check for reversed order match
+            const [firstName, lastName] = enteredName.split(" ");
+            const reversedName = `${lastName} ${firstName}`;
+            const reversedMatchIndex = formattedNames.findIndex(name => name === reversedName);
+            if (reversedMatchIndex !== -1) {
+                displayResult(lines[reversedMatchIndex]);
+                return;
             }
-            resultDiv.style.fontSize = "16px";
-            // Insert the resultDiv inside the resultContainer
-            const resultContainer = document.getElementById("resultContainer");
-            resultContainer.appendChild(resultDiv);
+
+            // Handle no match
+            displayNoResult();
         })
         .catch(error => console.log(error));
+}
+
+function displayResult(result) {
+    // Create and insert the new result div
+    const resultDiv = document.createElement("div");
+    resultDiv.id = "resultDiv";
+    resultDiv.classList.add("mx-auto");
+    const idText = document.createElement("span");
+    idText.innerText = result.split(",")[1];
+    idText.style.color = "#4E92EC";
+    resultDiv.innerText = "⚡ User found, ID is: ";
+    resultDiv.appendChild(idText);
+    resultDiv.style.fontSize = "12px";
+    // Insert the resultDiv inside the resultContainer
+    const resultContainer = document.getElementById("resultContainer");
+    resultContainer.appendChild(resultDiv);
+}
+
+function displayNoResult() {
+    // Create and insert the new result div for no result
+    const resultDiv = document.createElement("div");
+    resultDiv.id = "resultDiv";
+    resultDiv.classList.add("mx-auto");
+    resultDiv.innerText = "❌ User not found";
+    resultDiv.style.fontSize = "12px";
+    // Insert the resultDiv inside the resultContainer
+    const resultContainer = document.getElementById("resultContainer");
+    resultContainer.appendChild(resultDiv);
 }
 
 const searchButton = document.getElementById("searchButton");
