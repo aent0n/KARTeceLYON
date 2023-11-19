@@ -8,11 +8,11 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #2f2f2f;
+    background-color: #32323E;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #5ec08b;
+    background-color: #2CEFFD;
 }
 
 .button-animation {
