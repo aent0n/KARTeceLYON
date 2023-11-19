@@ -30,7 +30,7 @@ function searchName() {
             } else {
                 resultDiv.innerText = "❌ User not found";
             }
-            resultDiv.style.fontSize = "24px";
+            resultDiv.style.fontSize = "12px";
             // Insert the resultDiv inside the resultContainer
             const resultContainer = document.getElementById("resultContainer");
             resultContainer.appendChild(resultDiv);
