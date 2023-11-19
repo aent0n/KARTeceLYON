@@ -53,7 +53,7 @@ function displayResult(result) {
     idText.style.color = "#4E92EC";
     resultDiv.innerText = "⚡ User found, ID is: ";
     resultDiv.appendChild(idText);
-    resultDiv.style.fontSize = "12px";
+    resultDiv.style.fontSize = "24px";
     // Insert the resultDiv inside the resultContainer
     const resultContainer = document.getElementById("resultContainer");
     resultContainer.appendChild(resultDiv);
@@ -71,7 +71,7 @@ function displayNoResult() {
     resultDiv.id = "resultDiv";
     resultDiv.classList.add("mx-auto");
     resultDiv.innerText = "❌ User not found";
-    resultDiv.style.fontSize = "12px";
+    resultDiv.style.fontSize = "24px";
     // Insert the resultDiv inside the resultContainer
     const resultContainer = document.getElementById("resultContainer");
     resultContainer.appendChild(resultDiv);
