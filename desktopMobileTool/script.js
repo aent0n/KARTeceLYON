@@ -10,31 +10,31 @@ function searchName() {
     }
 
     fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            const lines = data.split("\n");
-            const formattedNames = lines.map(line => line.split(",")[0].toLowerCase().trim()); // Convert names to lowercase and remove extra spaces
+    .then(response => response.text())
+    .then(data => {
+        const lines = data.split("\n");
+        const formattedNames = lines.map(line => line.split(",")[0].toLowerCase().trim()); // Convert names to lowercase and remove extra spaces
 
-            // Check for direct match
-            const directMatchIndex = formattedNames.findIndex(name => name === enteredName);
-            if (directMatchIndex !== -1) {
-                displayResult(lines[directMatchIndex]);
-                return;
-            }
+        // Check for direct match, excluding "BLANK"
+        const directMatchIndex = formattedNames.findIndex(name => name === enteredName && name !== "blank");
+        if (directMatchIndex !== -1) {
+            displayResult(lines[directMatchIndex]);
+            return;
+        }
 
-            // Check for reversed order match
-            const [firstName, lastName] = enteredName.split(" ");
-            const reversedName = `${lastName} ${firstName}`;
-            const reversedMatchIndex = formattedNames.findIndex(name => name === reversedName);
-            if (reversedMatchIndex !== -1) {
-                displayResult(lines[reversedMatchIndex]);
-                return;
-            }
+        // Check for reversed order match
+        const [firstName, lastName] = enteredName.split(" ");
+        const reversedName = `${lastName} ${firstName}`;
+        const reversedMatchIndex = formattedNames.findIndex(name => name === reversedName);
+        if (reversedMatchIndex !== -1) {
+            displayResult(lines[reversedMatchIndex]);
+            return;
+        }
 
-            // Handle no match
-            displayNoResult();
-        })
-        .catch(error => console.log(error));
+        // Handle no match
+        displayNoResult();
+    })
+    .catch(error => console.log(error));
 }
 
 function displayResult(result) {
