@@ -3,5 +3,5 @@ A small utility web tool combining HTML5, CSS, and JavaScript languages ​​in
 <br>
 <br>
 Access it here at:
-<br>[bit.ly/kartverif-mob](bit.ly/kartverif-mob) for the mobile version
-<br>[bit.ly/kartverif-des](bit.ly/kartverif-des) for the desktop version
+<br>[bit.ly/kartverif-mob](https://aent0n.github.io/KARTeceLYON/mobileLookupTool/index.html) for the mobile version
+<br>[bit.ly/kartverif-des](https://aent0n.github.io/KARTeceLYON/desktopMobileTool/index.html) for the desktop version
